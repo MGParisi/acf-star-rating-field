@@ -152,14 +152,15 @@ class StarRatingField extends acf_field
      */
     public function input_admin_enqueue_scripts()
     {
-        $dir = plugin_dir_url(__FILE__);
-        
-        wp_enqueue_script('acf-input-star_rating', "{$dir}js/input.js");
+      $dir = plugin_dir_url(__FILE__);
+      if(class_exists('ACF')) {
+        wp_enqueue_script('acf-input-star_rating', "{$dir}js/input.js", array('jquery'), 1.01, TRUE);
         wp_enqueue_style(
             'font-awesome',
             "//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
         );
         wp_enqueue_style('acf-input-star_rating', "{$dir}css/input.css");
+      }
     }
 
     /**
